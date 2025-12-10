@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Hostel Portal</title>
+    <link rel="stylesheet" href="color.css">
+    </head>
+<body>
+ <header>
+        <h1>Hostel Management System 🏫</h1>
+        <nav>
+            
+            <button class="nav-btn" data-target="home">Home</button>
+            <button class="nav-btn" data-target="allocation">Room Allocation</button>
+            <button class="nav-btn" data-target="fees">Fees Details</button>
+
+            <button class="nav-btn" data-target="menu">Food Menu</button>
+            <button class="nav-btn" data-target="student-portal">Student Portal</button>
+            <button class="nav-btn" data-target="teacher-portal">Teacher Portal</button>
+            <button class="nav-btn" data-target="permission-letter">Permission Letter</button>
+            <button class="nav-btn" data-target="registration">Student Registration</button>
+
+        </nav>
+    </header>
+
+    <main>
+        
+        <section id="home" class="content-section active">
+            <h1>Welcome to the Hostel </h1>
+            <p>Use the navigation above to manage your room, check the menu, or access your respective portal.</p>
+            
+        </section>
+
+        <section id="allocation" class="content-section">
+            <h2>Room Allocation Details 🗝️</h2>
+            <div class="card">
+                <h3>Current Status (Example)</h3>
+                <p><strong>Total Rooms:</strong> 500</p>
+                <p><strong>Allocated:</strong> 450</p>
+                <p><strong>Available:</strong> 50</p>
+            </div>
+            <div class="card">
+                <h3>Allocation Process</h3>
+                <p>Students can apply via the Student Portal. Results will be posted here on <strong>Oct 25th</strong>.</p>
+                <table>
+                    <thead>
+                        <tr><th>Hostel Name</th><th>Capacity</th><th>Warden</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Block A</td><td>200</td><td>Mr. Sharma</td></tr>
+                        <tr><td>Block B</td><td>300</td><td>Ms. Kaur</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+    
+    <section id ="fees" class="content-section">
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .fees-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .fees-table th, .fees-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .fees-table th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+        }
+        .fees-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        input[type="number"] {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: right;
+        }
+        .total-row {
+            background-color: #ff9800; /* Orange background for total */
+            color: blue;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .currency {
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+
+
+
+    <div class="container">
+        <h2>Hostel Fees Calculator 🎓</h2>
+
+        <table class="fees-table">
+            <thead>
+                <tr>
+                    <th>Fee Component</th>
+                    <th>Amount (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hostel Stay (Accommodation)</td>
+                    <td>
+                        <input type="number" id="stayFee" value="25000" min="0" oninput="calculateTotal()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hostel Mess (Food Charges)</td>
+                    <td>
+                        <input type="number" id="messFee" value="30000" min="0" oninput="calculateTotal()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hostel Breakage Deposit (Refundable)</td>
+                    <td>
+                        <input type="number" id="breakageFee" value="5000" min="0" oninput="calculateTotal()">
+                    </td>
+                </tr>
+                <tr class="total-row">
+                    <td>Total Fees Payable</td>
+                    <td class="currency" id="totalFee">0.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="margin-top: 20px; font-size: 0.9em; color: #555;">
+            *The **Total Fees Payable** is automatically calculated from the amounts above.
+        </p>
+    </div>
+
+    <script>
+        // Function to calculate and update the total fees
+        function calculateTotal() {
+            // Get the values from the input fields. The '+' converts the string value to a number.
+            const stay = +document.getElementById('stayFee').value || 0;
+            const mess = +document.getElementById('messFee').value || 0;
+            const breakage = +document.getElementById('breakageFee').value || 0;
+
+            // Calculate the total
+            const total = stay + mess + breakage;
+
+            // Update the 'Total Fees Payable' cell
+            document.getElementById('totalFee').textContent = total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
+            // .toFixed(2) ensures two decimal places.
+            // .replace(...) adds commas for thousand separation (e.g., 60,000.00)
+        }
+
+        // Run the calculation once when the page loads to display the initial total
+        window.onload = calculateTotal;
+</script>
+</section>
+
+
+        <section id="menu" class="content-section">
+            <h2>Weekly Food Menu 🍽️</h2>
+            <table id="food-menu-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Breakfast</th>
+                        <th>Lunch</th>
+                        <th>Dinner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Monday</td><td>Poha & Tea</td><td>Rice, Dal, Veg Curry</td><td>Roti, Egg Curry</td></tr>
+                    <tr><td>Tuesday</td><td>Idli/Dosa</td><td>Rice, Sambar, Subji</td><td>Noodles & Soup</td></tr>
+                    <tr><td>Wednesday</td><td>Aloo Paratha</td><td>Biryani (Veg/Non-Veg)</td><td>Roti, Mixed Veg</td></tr>
+                    <tr><td>Thursday</td><td>Upma & Coffee</td><td>Rice, Rajma/Chole</td><td>Bread, Jam, Omelette</td></tr>
+                    <tr><td>Friday</td><td>Sandwiches</td><td>Lemon Rice, Curd</td><td>Special Dinner (Dosa Night)</td></tr>
+                    <tr><td>Saturday</td><td>Pancakes</td><td>Rice, Dal, Subji</td><td>Pizza & Salad</td></tr>
+                    <tr><td>Sunday</td><td>Poori & Bhaji</td><td>Full Meal (Thali)</td><td>Light Dinner (Khichdi)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="student-portal" class="content-section portal">
+            <h2>Student Portal 👋</h2>
+            <form id="request-form">
+                <label for="student-id">Student ID:</label>
+                <input type="text" id="student-id" required>
+
+                <label for="request-type">Type of Request:</label>
+                <select id="request-type" required>
+                    <option value="">-- Select --</option>
+                    <option value="Maintenance">Room Maintenance/Repair</option>
+                    <option value="Leave">Hostel Leave Request</option>
+                    <option value="Mess">Mess/Food Suggestion</option>
+                    <option value="Allocation">Room Change Request</option>
+                    <option value="Feedback">General Feedback</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="request-details">Details:</label>
+                <textarea id="request-details" rows="4" required></textarea>
+
+                <button type="submit">Submit Request</button>
+            </form>
+            <p id="student-status-message" style="display: none; color: green; margin-top: 10px;">Request submitted successfully!</p>
+        </section>
+
+        <section id="teacher-portal" class="content-section portal">
+            <h2>Teacher/Warden Portal 👨‍🏫</h2>
+            <p>Welcome, Warden. Here you can review and manage student requests.</p>
+
+            <h3>Pending Requests</h3>
+            <div id="pending-requests">
+                <p>No new requests.</p>
+                </div>
+
+            <div class="card">
+                <h3>Hostel Analytics (Example)</h3>
+                <p><strong>Total Pending Requests:</strong> <span id="pending-count">0</span></p>
+                <p><strong>Maintenance Backlog:</strong> 2</p>
+            </div>
+        </section>
+    <section id="permission-letter" class="content-section">
+    <style>
+        /* General Body and Container Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        header {
+            background-color: #3f51b5; /* Indigo */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .portal-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #3f51b5;
+            text-align: center;
+            border-bottom: 2px solid #c5cae9;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* Form Styles */
+        .permission-form label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            color: #555;
+        }
+
+        .permission-form input[type="text"],
+        .permission-form input[type="date"],
+        .permission-form textarea,
+        .permission-form select {
+            width: calc(100% - 22px); /* Adjusting for padding */
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        
+        .permission-form textarea {
+            resize: vertical;
+        }
+
+        .permission-form button {
+            width: 100%;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 12px 20px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .permission-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Status and Submissions Display */
+        #permission-status-message {
+            text-align: center;
+            padding: 15px;
+            background-color: #d4edda; /* Light green for success */
+            color: #155724; /* Dark green text */
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #submitted-letters {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #ddd;
+        }
+
+        #submitted-letters h3 {
+            color: #3f51b5;
+        }
+
+        .letter-card {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .letter-card p {
+            margin: 5px 0;
+        }
+        
+        /* Status Colors */
+        .status-pending { color: orange; font-weight: bold; }
+        .status-approved { color: #4CAF50; font-weight: bold; }
+        .status-rejected { color: #f44336; font-weight: bold; }
+
+    </style>
+<body>
+
+    <header>
+        <h1>Hostel Leave Permission Portal 📝</h1>
+    </header>
+
+    <main>
+        <div class="portal-container">
+            <h2>Submit Leave Request Form</h2>
+            <p style="text-align: center; color: #666;">Please fill out all fields accurately for warden review.</p>
+
+            <form id="permission-letter-form" class="permission-form">
+                
+                <label for="perm-student-id">Student ID:<br></label>
+                <input type="text" id="perm-student-id" required placeholder="e.g., CHTL001">
+
+                <label for="reason">Reason for Leave:<br></label>
+                <select id="reason" required>
+                    <option value="">-- Select Reason --</option>
+                    <option value="Home Visit">Home Visit</option>
+                    <option value="Medical Emergency">Medical Emergency</option>
+                    <option value="Educational Trip">Educational Trip (External)</option>
+                    <option value="Family Function">Family Function</option>
+                    <option value="Other">Other (Specify Below)</option>
+                </select>
+                
+                <label for="departure-date">Departure Date:<br></label>
+                <input type="date" id="departure-date" required>
+                
+                <label for="return-date">Expected Return Date:<br></label>
+                <input type="date" id="return-date" required>
+
+                <label for="destination">Destination/Address:<br></label>
+                <input type="text" id="destination" required placeholder="Full address and phone number where you will be staying">
+
+                <label for="perm-details">Detailed Explanation:<br></label>
+                <textarea id="perm-details" rows="4" required placeholder="Provide a detailed explanation and mention parental/guardian contact for verification."></textarea>
+
+                <button type="submit">Submit Permission Letter</button>
+            </form>
+
+            <div id="permission-status-message">Permission Letter submitted successfully and is **Pending** Warden Approval!</div>
+
+            <div id="submitted-letters">
+                <h3>Your Submitted Letters Status</h3>
+                <p id="no-letters-message">No letters submitted yet.</p>
+                </div>
+        </div>
+    </main>
+
+    <footer>
+        <p style="text-align: center; padding: 20px; color: #777;">&copy; 2025 College Hostel Management.</p>
+    </footer>
+
+    <script>
+        // Array to store submitted letters (simulating local database/storage)
+        let permissionLetters = [];
+
+        // --- Submission Logic ---
+        document.getElementById('permission-letter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // 1. Collect form data
+            const letterData = {
+                id: Date.now(), // Simple unique ID based on timestamp
+                studentId: document.getElementById('perm-student-id').value,
+                reason: document.getElementById('reason').value,
+                departure: document.getElementById('departure-date').value,
+                return: document.getElementById('return-date').value,
+                destination: document.getElementById('destination').value,
+                details: document.getElementById('perm-details').value,
+                status: 'Pending' // All requests start as pending
+            };
+
+            // 2. Store and reset
+            permissionLetters.push(letterData);
+            document.getElementById('permission-letter-form').reset();
+
+            // 3. Display success message
+            document.getElementById('permission-status-message').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('permission-status-message').style.display = 'none';
+            }, 5000);
+
+            // 4. Update the display of submitted letters
+            renderSubmittedLetters();
+        });
+
+        // --- Display Logic ---
+        function renderSubmittedLetters() {
+            const container = document.getElementById('submitted-letters');
+            
+            // Clear previous content but keep the main heading
+            container.querySelectorAll('.letter-card').forEach(card => card.remove());
+            
+            const noLettersMsg = document.getElementById('no-letters-message');
+
+            if (permissionLetters.length === 0) {
+                if (noLettersMsg) noLettersMsg.style.display = 'block';
+                return;
+            }
+            
+            if (noLettersMsg) noLettersMsg.style.display = 'none';
+            
+            // Reverse the array to show the newest submission first
+            permissionLetters.slice().reverse().forEach(letter => {
+                const card = document.createElement('div');
+                card.classList.add('letter-card');
+                
+                let statusClass = `status-${letter.status.toLowerCase()}`;
+
+                card.innerHTML = `
+                    <p><strong>Request ID:</strong> #${letter.id}</p>
+                    <p><strong>Student ID:</strong> ${letter.studentId}</p>
+                    <p><strong>Reason:</strong> ${letter.reason}</p>
+                    <p><strong>Dates:</strong> ${letter.departure} to ${letter.return}</p>
+                    <p><strong>Destination:</strong> ${letter.destination}</p>
+                    <p><strong>Status:</strong> <span class="${statusClass}">${letter.status}</span></p>
+                    <p style="font-style: italic; font-size: 0.9em; margin-top: 10px;">
+                        Details: ${letter.details.substring(0, 100)}...
+                    </p>
+                `;
+                // Insert the new card after the h3 and before the 'no letters' message
+                container.insertBefore(card, container.children[1]); 
+            });
+        }
+    </script>
+
+</section>
+<section id="registration" class="content-section">
+<style>
+         label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"], select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; font-size: 0.9em; margin-top: -10px; margin-bottom: 10px; }
+    </style>  
+    <div class="container">
+        <h2>🏛️ Hostel Student Registration</h2>
+        <form id=" registration">
+
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+            <div id="nameError" class="error"></div>
+
+            <label for="studentID">Student ID / Roll No:</label>
+            <input type="text" id="studentID" name="studentID" required>
+            <div id="idError" class="error"></div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <div id="emailError" class="error"></div>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">-- Select Gender --</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <div id="genderError" class="error"></div>
+
+            <label for="hostelPreference">Hostel Preference (e.g., Block A, Block B):</label>
+            <input type="text" id="hostelPreference" name="hostelPreference">
+
+            <button type="submit">Register Student</button>
+        </form>
+        </div>
+    
+</section>
+
+</main>
+
+<footer>
+        <p>&copy; 2025 College Hostel Management. All rights reserved.</p>
+    </footer>
+
+     <script src="script.js">
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    // 1. Prevent default form submission
+    event.preventDefault(); 
+    
+    // 2. Clear previous errors
+    clearErrors();
+
+    // 3. Perform Validation
+    if (validateForm()) {
+        // 4. Data Collection (for demonstration)
+        const studentData = {
+            name: document.getElementById('studentName').value,
+            id: document.getElementById('studentID').value,
+            email: document.getElementById('email').value,
+            gender: document.getElementById('gender').value,
+            preference: document.getElementById('hostelPreference').value
+        };
+
+        // 5. Success Message & Simulated Submission
+        console.log("Student Data:", studentData);
+        alert(`✅ Registration successful for ${studentData.name} (ID: ${studentData.id})!\n\nData would now be sent to the server.`);
+
+        // In a real application, replace the alert with a fetch API call:
+        /*
+        fetch('/api/register', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(studentData) 
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Registration successful! Server response: " + data.message);
+            event.target.reset(); // Clear form after successful submission
+        })
+        .catch(error => {
+            console.error('Submission Error:', error);
+            alert("Registration failed! Please try again.");
+        });
+        */
+        
+        event.target.reset(); // Clear the form fields
+    } else {
+        alert("🛑 Please correct the errors in the form before submission.");
+    }
+});
+
+function validateForm() {
+    let isValid = true;
+    
+    // Get all input values
+    const name = document.getElementById('studentName').value.trim();
+    const id = document.getElementById('studentID').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const gender = document.getElementById('gender').value;
+
+    // A. Student Name Validation (Must not be empty)
+    if (name === "") {
+        displayError('nameError', 'Student Name is required.');
+        isValid = false;
+    }
+
+    // B. Student ID/Roll No Validation (Must not be empty and must be alphanumeric)
+    const idRegex = /^[A-Za-z0-9]+$/;
+    if (id === "") {
+        displayError('idError', 'Student ID is required.');
+        isValid = false;
+    } else if (!idRegex.test(id)) {
+        displayError('idError', 'Student ID must be alphanumeric.');
+        isValid = false;
+    }
+
+    // C. Email Validation (Must follow email format)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === "") {
+        displayError('emailError', 'Email is required.');
+        isValid = false;
+    } else if (!emailRegex.test(email)) {
+        displayError('emailError', 'Please enter a valid email address.');
+        isValid = false;
+    }
+
+    // D. Gender Validation (Must select an option)
+    if (gender === "") {
+        displayError('genderError', 'Gender selection is required.');
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function displayError(elementId, message) {
+    document.getElementById(elementId).textContent = message;
+}
+
+function clearErrors() {
+    const errorElements = document.querySelectorAll('.error');
+    errorElements.forEach(el => el.textContent = '');
+}
+    </script>
+
+</body>
+
+</html>
