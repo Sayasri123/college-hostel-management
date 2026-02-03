@@ -5,27 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Hostel Portal</title>
     <link rel="stylesheet" href="color.css">
-    </head>
+    <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="color.css">
+    <style>
+        #permission-status-message {
+            transition: all 0.5s ease;
+            font-weight: bold;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+            text-align: center;
+        }
+    </style>
+</head>
+    
 <body>
- <header>
+
+    <header>
+
         <h1>Hostel Management System 🏫</h1>
         <nav>
-            
             <button class="nav-btn" data-target="home">Home</button>
             <button class="nav-btn" data-target="allocation">Room Allocation</button>
             <button class="nav-btn" data-target="fees">Fees Details</button>
-
             <button class="nav-btn" data-target="menu">Food Menu</button>
             <button class="nav-btn" data-target="student-portal">Student Portal</button>
             <button class="nav-btn" data-target="teacher-portal">Teacher Portal</button>
-            <button class="nav-btn" data-target="permission-letter">Permission Letter</button>
-            <button class="nav-btn" data-target="registration">Student Registration</button>
+            <button class="nav-btn" data-target="parents-portal">Parents Portal</button>
+            <button class="nav-btn" data-target="permission letter">Permission letter</button>
+            
+
 
         </nav>
     </header>
 
     <main>
-        
         <section id="home" class="content-section active">
             <h1>Welcome to the Hostel </h1>
             <p>Use the navigation above to manage your room, check the menu, or access your respective portal.</p>
@@ -155,6 +170,25 @@
             *The **Total Fees Payable** is automatically calculated from the amounts above.
         </p>
     </div>
+    <div class="container" style="text-align: center; margin-top: 20px;">
+    <button id="payNowBtn" style="background: #2196F3; color: white; padding: 10px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em;">
+        Pay via QR Code 📱
+    </button>
+    
+    <div id="qrContainer" style="display: none; margin-top: 20px; padding: 15px; border: 2px dashed #bbb; background: white;">
+        <h4>Scan to Pay</h4>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=hostel@upi&pn=HostelFees" alt="Payment QR">
+        <p style="font-size: 0.8em; color: red;">*Verification notifications will be sent to the Warden.</p>
+    </div>
+</div>
+
+<script>
+    // Inga toggle logic mattum add pannunga
+    document.getElementById('payNowBtn').onclick = function() {
+        const qr = document.getElementById('qrContainer');
+        qr.style.display = qr.style.display === 'none' ? 'block' : 'none';
+    };
+</script>
 
     <script>
         // Function to calculate and update the total fees
@@ -216,7 +250,6 @@
                     <option value="Mess">Mess/Food Suggestion</option>
                     <option value="Allocation">Room Change Request</option>
                     <option value="Feedback">General Feedback</option>
-                    <option value="Other">Other</option>
                 </select>
 
                 <label for="request-details">Details:</label>
@@ -227,22 +260,112 @@
             <p id="student-status-message" style="display: none; color: green; margin-top: 10px;">Request submitted successfully!</p>
         </section>
 
-        <section id="teacher-portal" class="content-section portal">
-            <h2>Teacher/Warden Portal 👨‍🏫</h2>
-            <p>Welcome, Warden. Here you can review and manage student requests.</p>
+        <section id="parents-portal" class="content-section portal">
+    <h2>Parents Monitoring Portal 👨‍👩‍👧‍👦</h2>
+    <p style="text-align: center;">Welcome Parent! View your ward's hostel activity here.</p>
 
-            <h3>Pending Requests</h3>
-            <div id="pending-requests">
-                <p>No new requests.</p>
-                </div>
+    <div class="card" style="border-left: 5px solid #3f51b5;">
+        <h3>Student Information</h3>
+        <p><strong>Ward Name:</strong> Student Name (Demo)</p>
+        <p><strong>Room No:</strong> B-204</p>
+        <p><strong>Attendance:</strong> 95% (In Hostel)</p>
+    </div>
 
-            <div class="card">
-                <h3>Hostel Analytics (Example)</h3>
-                <p><strong>Total Pending Requests:</strong> <span id="pending-count">0</span></p>
-                <p><strong>Maintenance Backlog:</strong> 2</p>
-            </div>
-        </section>
-    <section id="permission-letter" class="content-section">
+    <div class="card">
+        <h3>📍 Ward's Live Location (Permission Tracker)</h3>
+        <div id="parent-map" style="width: 100%; height: 200px; background: #e0e0e0; border-radius: 8px; position: relative;">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125406.10724838426!2d78.04639148455167!3d10.815858907379761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2d1396f947df%3A0xb306121f1d18f731!2sTrichy%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1715850000000!5m2!1sen!2sin" 
+                width="100%" height="100%" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+        <p style="color: green; font-weight: bold; margin-top: 10px;">🟢 Status: Reached Destination Address</p>
+    </div>
+
+    <div class="card">
+        <h3>💰 Fees Summary</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 8px;">Total Fees</td>
+                <td style="padding: 8px; text-align: right;">₹ 60,000.00</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd; color: green;">
+                <td style="padding: 8px;">Fees Paid</td>
+                <td style="padding: 8px; text-align: right;">₹ 60,000.00</td>
+            </tr>
+            <tr style="font-weight: bold; color: blue;">
+                <td style="padding: 8px;">Balance Due</td>
+                <td style="padding: 8px; text-align: right;">₹ 0.00</td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; border-left: 5px solid #4caf50; margin-top: 15px;">
+        <strong>System Notification:</strong>
+        <p style="margin: 5px 0; font-size: 0.9em;">Ward's Leave Request for "Home Visit" was Approved by Warden on Dec 18, 2025.</p>
+    </div>
+</section>
+
+       <section id="teacher-portal" class="content-section portal">
+    <h2>Teacher Admin Dashboard 👨‍🏫</h2>
+
+    <div class="card" style="background: #fff; border-left: 5px solid #4CAF50; padding: 20px; margin-bottom: 25px;">
+        <h3>➕ Register New Student</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+            <input type="text" id="reg-name" placeholder="Name">
+            <input type="text" id="reg-id" placeholder="Roll No">
+            <select id="reg-dept">
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="IT">IT</option>
+                <option value="MECH">MECH</option>
+            </select>
+            <select id="reg-year">
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+            </select>
+            <button onclick="addNewStudent()" style="background: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px;">Add Student</button>
+        </div>
+    </div>
+
+    <div class="card" style="background: #f9f9f9; padding: 20px; margin-bottom: 20px; border: 1px solid #ddd;">
+        <h3>🔍 Search & Filter Students</h3>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <input type="text" id="searchName" placeholder="Search by Name..." onkeyup="applyFilters()" style="flex: 2; padding: 8px;">
+            <select id="filterDept" onchange="applyFilters()" style="flex: 1; padding: 8px;">
+                <option value="">All Departments</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="IT">IT</option>
+            </select>
+            <select id="filterYear" onchange="applyFilters()" style="flex: 1; padding: 8px;">
+                <option value="">All Years</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="card" style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse;" id="studentTable">
+            <thead>
+                <tr style="background: #3f51b5; color: white;">
+                    <th style="padding: 12px; text-align: left;">Name</th>
+                    <th style="padding: 12px; text-align: left;">Roll No</th>
+                    <th style="padding: 12px; text-align: left;">Dept</th>
+                    <th style="padding: 12px; text-align: left;">Year</th>
+                    <th style="padding: 12px; text-align: left;">Tracking Status</th>
+                    <th style="padding: 12px; text-align: left;">Action</th>
+                </tr>
+            </thead>
+            <tbody id="teacher-student-list">
+                </tbody>
+        </table>
+    </div>
+</section>
+
+    <section id="permission letter" class="content-section">
     <style>
         /* General Body and Container Styles */
         body {
@@ -396,6 +519,12 @@
                 <label for="destination">Destination/Address:<br></label>
                 <input type="text" id="destination" required placeholder="Full address and phone number where you will be staying">
 
+                <label for="parent-phone-verify">Registered Parent Mobile Number:<br></label>
+                <input type="number" id="parent-phone-verify" required placeholder="Enter Parent's Registered Number">
+
+                <label for="perm-details">Detailed Explanation:<br></label>
+                <textarea id="perm-details" rows="4" required ...></textarea>
+
                 <label for="perm-details">Detailed Explanation:<br></label>
                 <textarea id="perm-details" rows="4" required placeholder="Provide a detailed explanation and mention parental/guardian contact for verification."></textarea>
 
@@ -408,6 +537,26 @@
                 <h3>Your Submitted Letters Status</h3>
                 <p id="no-letters-message">No letters submitted yet.</p>
                 </div>
+                <div class="portal-container" style="margin-top: 20px; border: 2px solid #3f51b5;">
+    <h3>📍 Live Student Tracking (Warden & Parent View)</h3>
+    <p style="font-size: 0.8em; color: #666;">Status: Student is currently in transit to home.</p>
+    
+    <div id="map-simulation" style="width: 100%; height: 250px; background: #e5e3df; border-radius: 8px; position: relative; border: 1px solid #ccc;">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125322.44153139368!2d78.04638528863678!3d10.824704620579606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f03c9270e5d%3A0xc3f8e590483a992!2sTiruchirappalli%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000" 
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+        <div style="position: absolute; top: 10px; left: 10px; background: rgba(0,128,0,0.8); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.7em;">
+            🟢 LIVE TRACKING ACTIVE
+        </div>
+    </div>
+
+    <div id="log" style="margin-top: 10px; background: #fffde7; padding: 10px; border-left: 5px solid #fbc02d; font-size: 0.8em;">
+        <b>Notifications:</b>
+        <br>📩 Warden: Location matches permission details:</br>
+        <br>📩 Parent: Student safely reached destination:</br>
+    </div>
+</div>
         </div>
     </main>
 
@@ -416,229 +565,34 @@
     </footer>
 
     <script>
-        // Array to store submitted letters (simulating local database/storage)
-        let permissionLetters = [];
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const sections = document.querySelectorAll('.content-section');
 
-        // --- Submission Logic ---
-        document.getElementById('permission-letter-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // 1. Collect form data
-            const letterData = {
-                id: Date.now(), // Simple unique ID based on timestamp
-                studentId: document.getElementById('perm-student-id').value,
-                reason: document.getElementById('reason').value,
-                departure: document.getElementById('departure-date').value,
-                return: document.getElementById('return-date').value,
-                destination: document.getElementById('destination').value,
-                details: document.getElementById('perm-details').value,
-                status: 'Pending' // All requests start as pending
-            };
-
-            // 2. Store and reset
-            permissionLetters.push(letterData);
-            document.getElementById('permission-letter-form').reset();
-
-            // 3. Display success message
-            document.getElementById('permission-status-message').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('permission-status-message').style.display = 'none';
-            }, 5000);
-
-            // 4. Update the display of submitted letters
-            renderSubmittedLetters();
-        });
-
-        // --- Display Logic ---
-        function renderSubmittedLetters() {
-            const container = document.getElementById('submitted-letters');
-            
-            // Clear previous content but keep the main heading
-            container.querySelectorAll('.letter-card').forEach(card => card.remove());
-            
-            const noLettersMsg = document.getElementById('no-letters-message');
-
-            if (permissionLetters.length === 0) {
-                if (noLettersMsg) noLettersMsg.style.display = 'block';
-                return;
-            }
-            
-            if (noLettersMsg) noLettersMsg.style.display = 'none';
-            
-            // Reverse the array to show the newest submission first
-            permissionLetters.slice().reverse().forEach(letter => {
-                const card = document.createElement('div');
-                card.classList.add('letter-card');
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-target');
                 
-                let statusClass = `status-${letter.status.toLowerCase()}`;
-
-                card.innerHTML = `
-                    <p><strong>Request ID:</strong> #${letter.id}</p>
-                    <p><strong>Student ID:</strong> ${letter.studentId}</p>
-                    <p><strong>Reason:</strong> ${letter.reason}</p>
-                    <p><strong>Dates:</strong> ${letter.departure} to ${letter.return}</p>
-                    <p><strong>Destination:</strong> ${letter.destination}</p>
-                    <p><strong>Status:</strong> <span class="${statusClass}">${letter.status}</span></p>
-                    <p style="font-style: italic; font-size: 0.9em; margin-top: 10px;">
-                        Details: ${letter.details.substring(0, 100)}...
-                    </p>
-                `;
-                // Insert the new card after the h3 and before the 'no letters' message
-                container.insertBefore(card, container.children[1]); 
+                sections.forEach(sec => {
+                    sec.classList.remove('active'); // Ella section-aiyum maraikkum
+                    if (sec.id === target) {
+                        sec.classList.add('active'); // Click panna section-ai mattum kaatum
+                    }
+                });
             });
-        }
+        });
     </script>
-
-</section>
-<section id="registration" class="content-section">
-<style>
-         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], input[type="email"], select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; }
-        button:hover { background-color: #0056b3; }
-        .error { color: red; font-size: 0.9em; margin-top: -10px; margin-bottom: 10px; }
-    </style>  
-    <div class="container">
-        <h2>🏛️ Hostel Student Registration</h2>
-        <form id=" registration">
-
-            <label for="studentName">Student Name:</label>
-            <input type="text" id="studentName" name="studentName" required>
-            <div id="nameError" class="error"></div>
-
-            <label for="studentID">Student ID / Roll No:</label>
-            <input type="text" id="studentID" name="studentID" required>
-            <div id="idError" class="error"></div>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <div id="emailError" class="error"></div>
-
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="">-- Select Gender --</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-            <div id="genderError" class="error"></div>
-
-            <label for="hostelPreference">Hostel Preference (e.g., Block A, Block B):</label>
-            <input type="text" id="hostelPreference" name="hostelPreference">
-
-            <button type="submit">Register Student</button>
-        </form>
-        </div>
     
 </section>
 
-</main>
+    </main>
 
-<footer>
+    <footer>
         <p>&copy; 2025 College Hostel Management. All rights reserved.</p>
     </footer>
-
-     <script src="script.js">
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-    // 1. Prevent default form submission
-    event.preventDefault(); 
     
-    // 2. Clear previous errors
-    clearErrors();
+    <script src="client.js"></script>
 
-    // 3. Perform Validation
-    if (validateForm()) {
-        // 4. Data Collection (for demonstration)
-        const studentData = {
-            name: document.getElementById('studentName').value,
-            id: document.getElementById('studentID').value,
-            email: document.getElementById('email').value,
-            gender: document.getElementById('gender').value,
-            preference: document.getElementById('hostelPreference').value
-        };
-
-        // 5. Success Message & Simulated Submission
-        console.log("Student Data:", studentData);
-        alert(`✅ Registration successful for ${studentData.name} (ID: ${studentData.id})!\n\nData would now be sent to the server.`);
-
-        // In a real application, replace the alert with a fetch API call:
-        /*
-        fetch('/api/register', { 
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(studentData) 
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert("Registration successful! Server response: " + data.message);
-            event.target.reset(); // Clear form after successful submission
-        })
-        .catch(error => {
-            console.error('Submission Error:', error);
-            alert("Registration failed! Please try again.");
-        });
-        */
-        
-        event.target.reset(); // Clear the form fields
-    } else {
-        alert("🛑 Please correct the errors in the form before submission.");
-    }
-});
-
-function validateForm() {
-    let isValid = true;
-    
-    // Get all input values
-    const name = document.getElementById('studentName').value.trim();
-    const id = document.getElementById('studentID').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const gender = document.getElementById('gender').value;
-
-    // A. Student Name Validation (Must not be empty)
-    if (name === "") {
-        displayError('nameError', 'Student Name is required.');
-        isValid = false;
-    }
-
-    // B. Student ID/Roll No Validation (Must not be empty and must be alphanumeric)
-    const idRegex = /^[A-Za-z0-9]+$/;
-    if (id === "") {
-        displayError('idError', 'Student ID is required.');
-        isValid = false;
-    } else if (!idRegex.test(id)) {
-        displayError('idError', 'Student ID must be alphanumeric.');
-        isValid = false;
-    }
-
-    // C. Email Validation (Must follow email format)
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === "") {
-        displayError('emailError', 'Email is required.');
-        isValid = false;
-    } else if (!emailRegex.test(email)) {
-        displayError('emailError', 'Please enter a valid email address.');
-        isValid = false;
-    }
-
-    // D. Gender Validation (Must select an option)
-    if (gender === "") {
-        displayError('genderError', 'Gender selection is required.');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function displayError(elementId, message) {
-    document.getElementById(elementId).textContent = message;
-}
-
-function clearErrors() {
-    const errorElements = document.querySelectorAll('.error');
-    errorElements.forEach(el => el.textContent = '');
-}
-    </script>
+    <script src="script.js"></script>
 
 </body>
-
 </html>
